@@ -2,36 +2,36 @@
 
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { Upload, Settings, Zap, MessageSquare } from "lucide-react"
+import { Upload, Sparkles, Send, Users } from "lucide-react"
 
 const steps = [
   {
+    num: "01",
     icon: Upload,
-    title: "Upload Your Resume",
-    description: "Simply upload your resume and let our AI analyze your skills, experience, and career goals.",
-    color: "ocean",
-    gradient: "from-ocean to-teal",
+    title: "Upload Your Profile",
+    description: "Drop your resume or LinkedIn. Our AI extracts every skill, achievement, and keyword in seconds.",
+    color: "#00F0FF",
   },
   {
-    icon: Settings,
-    title: "Customize Preferences",
-    description: "Set your job preferences, target companies, salary range, and location. Our AI learns what you want.",
-    color: "teal",
-    gradient: "from-teal to-violet",
+    num: "02",
+    icon: Sparkles,
+    title: "AI Optimizes Everything",
+    description: "For every job, we rewrite your resume to match the exact keywords and requirements. ATS-friendly, human-impressive.",
+    color: "#8B5CF6",
   },
   {
-    icon: Zap,
-    title: "AI Auto-Applies",
-    description: "Our intelligent agents search job boards 24/7, customize applications, and apply on your behalf.",
-    color: "violet",
-    gradient: "from-violet to-ocean",
+    num: "03",
+    icon: Send,
+    title: "Autonomous Applications",
+    description: "Our agent applies to 50-200 matched roles across LinkedIn, Indeed, Greenhouse, Lever, and 40+ other platforms while you sleep.",
+    color: "#00F0FF",
   },
   {
-    icon: MessageSquare,
-    title: "Interview & Connect",
-    description: "Get notified when companies respond. We help you prepare with AI-powered interview coaching.",
-    color: "ocean",
-    gradient: "from-ocean to-teal",
+    num: "04",
+    icon: Users,
+    title: "Direct Recruiter Outreach",
+    description: "We find hiring manager emails and send personalized outreach with your optimized resume. No gatekeepers.",
+    color: "#10B981",
   },
 ]
 
@@ -42,45 +42,44 @@ export function HowItWorks() {
     offset: ["start end", "end start"],
   })
 
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
+  const lineHeight = useTransform(scrollYProgress, [0.1, 0.9], ["0%", "100%"])
 
   return (
-    <section id="how-it-works" className="py-20 md:py-32 relative overflow-hidden">
+    <section id="how-it-works" className="py-24 md:py-32 relative overflow-hidden bg-[#050505]">
       {/* Background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-violet/5 blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-ocean/5 blur-3xl" />
+      <div className="absolute inset-0">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-[#8B5CF6]/5 blur-[150px]" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-[#00F0FF]/5 blur-[150px]" />
       </div>
 
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="container mx-auto px-6 lg:px-8 relative">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16 md:mb-24"
+          className="text-center mb-20"
         >
-          <span className="text-sm font-medium text-ocean mb-4 block">How It Works</span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Four Steps to Your
-            <span className="gradient-text"> Dream Career</span>
+          <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#00F0FF] mb-4 block">
+            THE PROCESS
+          </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#F9FAFB] mb-4">
+            Four Steps to Your Next Role
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Getting started is simple. Our AI handles the heavy lifting so you can focus on what matters.
-          </p>
         </motion.div>
 
         <div ref={containerRef} className="relative max-w-4xl mx-auto">
           {/* Progress line */}
-          <div className="absolute left-8 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-border hidden md:block">
+          <div className="absolute left-8 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-px bg-[var(--border-subtle)]">
             <motion.div
               style={{ height: lineHeight }}
-              className="w-full bg-gradient-to-b from-ocean via-teal to-violet"
+              className="w-full bg-gradient-to-b from-[#00F0FF] via-[#8B5CF6] to-[#10B981]"
             />
           </div>
 
           {/* Steps */}
-          <div className="space-y-12 md:space-y-24">
+          <div className="space-y-16 md:space-y-24">
             {steps.map((step, index) => {
               const Icon = step.icon
               const isEven = index % 2 === 0
@@ -88,51 +87,63 @@ export function HowItWorks() {
               return (
                 <motion.div
                   key={step.title}
-                  initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+                  initial={{ opacity: 0, x: isEven ? -30 : 30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className={`relative flex flex-col md:flex-row items-center gap-6 md:gap-12 ${
+                  className={`relative flex flex-col md:flex-row items-center gap-8 md:gap-16 ${
                     isEven ? "md:flex-row" : "md:flex-row-reverse"
                   }`}
                 >
                   {/* Content */}
                   <div className={`flex-1 ${isEven ? "md:text-right" : "md:text-left"}`}>
-                    <div
-                      className={`glass rounded-2xl p-6 md:p-8 relative overflow-hidden group hover:glow-${step.color} transition-shadow duration-300`}
+                    <motion.div
+                      whileHover={{ y: -4, borderColor: step.color }}
+                      transition={{ duration: 0.3 }}
+                      className="bg-[#111118] border border-[var(--border-subtle)] rounded-2xl p-8 relative overflow-hidden group"
                     >
-                      {/* Background gradient on hover */}
-                      <div
-                        className={`absolute inset-0 bg-gradient-to-br ${step.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
-                      />
-                      
+                      {/* Large background number */}
+                      <span 
+                        className="absolute top-4 right-6 text-[8rem] font-extrabold opacity-[0.03] leading-none pointer-events-none"
+                        style={{ color: step.color }}
+                      >
+                        {step.num}
+                      </span>
+
                       <div className="relative">
-                        <span className="text-xs font-mono text-muted-foreground mb-2 block">
-                          STEP {String(index + 1).padStart(2, "0")}
-                        </span>
-                        <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">
-                          {step.title}
+                        <h3 className="text-xl md:text-2xl font-bold text-[#F9FAFB] mb-3">
+                          {step.num} — {step.title}
                         </h3>
-                        <p className="text-muted-foreground">{step.description}</p>
+                        <p className="text-[#9CA3AF] leading-relaxed">{step.description}</p>
                       </div>
-                    </div>
+
+                      {/* Hover glow */}
+                      <div 
+                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                        style={{
+                          background: `radial-gradient(circle at 50% 50%, ${step.color}08 0%, transparent 70%)`
+                        }}
+                      />
+                    </motion.div>
                   </div>
 
                   {/* Icon */}
-                  <div className="relative flex-shrink-0 order-first md:order-none">
+                  <div className="relative flex-shrink-0 order-first md:order-none z-10">
                     <motion.div
                       whileHover={{ scale: 1.1 }}
-                      className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${step.gradient} flex items-center justify-center relative z-10`}
+                      className="w-16 h-16 rounded-2xl flex items-center justify-center relative"
+                      style={{ backgroundColor: `${step.color}15`, border: `1px solid ${step.color}30` }}
                     >
-                      <Icon className="w-8 h-8 text-white" />
+                      <Icon className="w-7 h-7" style={{ color: step.color }} />
                     </motion.div>
                     {/* Glow */}
                     <div
-                      className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${step.gradient} blur-xl opacity-50`}
+                      className="absolute inset-0 rounded-2xl blur-xl opacity-40"
+                      style={{ backgroundColor: step.color }}
                     />
                   </div>
 
-                  {/* Spacer for alignment */}
+                  {/* Spacer */}
                   <div className="flex-1 hidden md:block" />
                 </motion.div>
               )

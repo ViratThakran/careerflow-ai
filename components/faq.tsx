@@ -2,43 +2,38 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { ChevronDown } from "lucide-react"
+import { Plus, Minus } from "lucide-react"
 
 const faqs = [
   {
-    question: "How does CareerFlow AI find jobs for me?",
+    question: "How does CareerFlow find and apply to jobs?",
     answer:
-      "Our AI agents continuously scan major job boards, company career pages, and LinkedIn 24/7. They use advanced matching algorithms to identify positions that align with your skills, experience, and preferences. The system learns from your feedback to improve matches over time.",
+      "Our AI agents scan LinkedIn, Indeed, Glassdoor, company career pages, and 40+ job boards 24/7. For each matching position, we analyze the job requirements, optimize your resume with relevant keywords, generate a tailored cover letter, and submit the complete application—all autonomously.",
   },
   {
     question: "Is my personal information safe?",
     answer:
-      "Absolutely. We use enterprise-grade encryption for all data at rest and in transit. Your information is never sold or shared with third parties. You maintain full control over what information is included in each application, and you can delete your data at any time.",
+      "Yes. We use enterprise-grade AES-256 encryption for all data. Your information is never sold or shared. You control exactly what goes into each application, and you can delete all data at any time. We're SOC 2 Type II compliant.",
   },
   {
-    question: "Can employers tell I used an AI to apply?",
+    question: "Can employers tell I used AI to apply?",
     answer:
-      "No. Our AI generates unique, personalized applications that read as authentically human. Each resume and cover letter is tailored to the specific job posting while maintaining your voice and style. Many of our users have received compliments on their well-crafted applications.",
+      "No. Our AI generates unique, natural-sounding applications that maintain your voice and style. Each resume and cover letter is genuinely customized—not template-based. Many users receive compliments on their \"well-crafted\" applications.",
   },
   {
-    question: "What job boards does CareerFlow support?",
+    question: "What's the direct recruiter outreach feature?",
     answer:
-      "We integrate with all major platforms including LinkedIn, Indeed, Glassdoor, ZipRecruiter, and company career pages for Fortune 500 companies. We also support industry-specific job boards for tech, finance, healthcare, and more. We&apos;re constantly adding new integrations.",
+      "We use AI to find verified email addresses of hiring managers and recruiters at your target companies. Then we send personalized outreach emails on your behalf, introducing you and attaching your optimized resume. This bypasses ATS filters entirely.",
   },
   {
-    question: "How is this different from other job search tools?",
+    question: "Can I review applications before they're sent?",
     answer:
-      "Unlike traditional job aggregators that just show you listings, CareerFlow actively applies on your behalf with fully customized applications. Our AI handles the entire process - from finding matches to submitting applications to tracking responses - while you focus on interview prep.",
-  },
-  {
-    question: "Can I review applications before they are sent?",
-    answer:
-      "Yes! You can configure your preferences to require approval before any application is submitted, or you can enable auto-apply for positions that meet certain criteria. You always have full visibility into what&apos;s being sent on your behalf through our dashboard.",
+      "Absolutely. You can require approval for every application, or set auto-apply for positions meeting specific criteria (salary, company size, role level). You always have full visibility through the dashboard.",
   },
   {
     question: "What if I get too many interview requests?",
     answer:
-      "That&apos;s a good problem to have! You can pause the AI agent at any time, adjust your application volume, or narrow your targeting criteria. We also provide interview scheduling assistance to help you manage multiple opportunities efficiently.",
+      "That's the goal! You can pause the agent anytime, narrow your targeting, or reduce application volume. We also provide interview scheduling tools to help manage multiple opportunities efficiently.",
   },
 ]
 
@@ -46,31 +41,30 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   return (
-    <section id="faq" className="py-20 md:py-32 relative overflow-hidden">
+    <section id="faq" className="py-24 md:py-32 relative overflow-hidden bg-[#0a0a0f]">
       {/* Background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-ocean/5 blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-teal/5 blur-3xl" />
+      <div className="absolute inset-0">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-[#00F0FF]/5 blur-[150px]" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-[#8B5CF6]/5 blur-[150px]" />
       </div>
 
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="container mx-auto px-6 lg:px-8 relative">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-sm font-medium text-ocean mb-4 block">FAQ</span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Frequently Asked
-            <span className="gradient-text"> Questions</span>
+          <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#00F0FF] mb-4 block">
+            FAQ
+          </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#F9FAFB] mb-4">
+            Common Questions
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Everything you need to know about CareerFlow AI.
-          </p>
         </motion.div>
 
+        {/* FAQ Items */}
         <div className="max-w-3xl mx-auto">
           {faqs.map((faq, index) => (
             <motion.div
@@ -83,15 +77,24 @@ export function FAQ() {
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full glass rounded-xl p-5 text-left flex items-center justify-between hover:bg-secondary/30 transition-colors"
+                className={`w-full bg-[#111118] border rounded-xl p-5 text-left flex items-center justify-between transition-all duration-300 ${
+                  openIndex === index 
+                    ? "border-[rgba(0,240,255,0.3)]" 
+                    : "border-[var(--border-subtle)] hover:border-[rgba(0,240,255,0.2)]"
+                }`}
               >
-                <span className="font-medium text-foreground pr-4">{faq.question}</span>
+                <span className="font-medium text-[#F9FAFB] pr-4">{faq.question}</span>
                 <motion.div
-                  animate={{ rotate: openIndex === index ? 180 : 0 }}
+                  animate={{ rotate: openIndex === index ? 45 : 0 }}
                   transition={{ duration: 0.2 }}
-                  className="flex-shrink-0"
+                  className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center"
+                  style={{ backgroundColor: openIndex === index ? "rgba(0,240,255,0.1)" : "transparent" }}
                 >
-                  <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                  {openIndex === index ? (
+                    <Minus className="w-4 h-4 text-[#00F0FF]" />
+                  ) : (
+                    <Plus className="w-4 h-4 text-[#9CA3AF]" />
+                  )}
                 </motion.div>
               </button>
               <AnimatePresence>
@@ -100,10 +103,10 @@ export function FAQ() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
+                    transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <div className="px-5 py-4 text-muted-foreground">
+                    <div className="px-5 py-4 text-[#9CA3AF] leading-relaxed">
                       {faq.answer}
                     </div>
                   </motion.div>
