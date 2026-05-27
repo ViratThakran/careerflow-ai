@@ -2,38 +2,40 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Plus, Minus } from "lucide-react"
+import { Plus } from "lucide-react"
 
 const faqs = [
   {
-    question: "How does CareerFlow find and apply to jobs?",
-    answer:
-      "Our AI agents scan LinkedIn, Indeed, Glassdoor, company career pages, and 40+ job boards 24/7. For each matching position, we analyze the job requirements, optimize your resume with relevant keywords, generate a tailored cover letter, and submit the complete application—all autonomously.",
+    question: "Is this legal? Will companies know I'm using AI?",
+    answer: "Yes, it's completely legal. We submit legitimate applications on your behalf using your real credentials and qualifications. Companies see a polished, professional application that accurately represents you. Our AI simply helps you apply more efficiently and present yourself in the best light—similar to how a career coach or professional resume writer would help you.",
   },
   {
-    question: "Is my personal information safe?",
-    answer:
-      "Yes. We use enterprise-grade AES-256 encryption for all data. Your information is never sold or shared. You control exactly what goes into each application, and you can delete all data at any time. We're SOC 2 Type II compliant.",
+    question: "How does the AI customize my resume for each job?",
+    answer: "Our AI analyzes each job description to identify key requirements, skills, and keywords. It then reorganizes and rephrases your resume to highlight the most relevant experience, incorporates ATS-friendly keywords naturally, and adjusts the emphasis based on what each specific employer is looking for. The result is a resume that reads authentically while being optimized for both human reviewers and applicant tracking systems.",
   },
   {
-    question: "Can employers tell I used AI to apply?",
-    answer:
-      "No. Our AI generates unique, natural-sounding applications that maintain your voice and style. Each resume and cover letter is genuinely customized—not template-based. Many users receive compliments on their \"well-crafted\" applications.",
-  },
-  {
-    question: "What's the direct recruiter outreach feature?",
-    answer:
-      "We use AI to find verified email addresses of hiring managers and recruiters at your target companies. Then we send personalized outreach emails on your behalf, introducing you and attaching your optimized resume. This bypasses ATS filters entirely.",
+    question: "Which job boards and platforms do you support?",
+    answer: "We integrate with 50+ platforms including LinkedIn, Indeed, Glassdoor, ZipRecruiter, Greenhouse, Lever, Workday, and most major company career pages. We continuously add new integrations based on user demand. Our agents can also find and apply to jobs posted on company websites directly, even if they're not on major job boards.",
   },
   {
     question: "Can I review applications before they're sent?",
-    answer:
-      "Absolutely. You can require approval for every application, or set auto-apply for positions meeting specific criteria (salary, company size, role level). You always have full visibility through the dashboard.",
+    answer: "Absolutely. You have full control over the process. You can require manual approval for every application, or set up smart filters to auto-approve applications that meet specific criteria (job title, salary range, company size, etc.). Many users start with manual approval while they learn to trust the system, then gradually enable auto-apply for certain job types.",
   },
   {
-    question: "What if I get too many interview requests?",
-    answer:
-      "That's the goal! You can pause the agent anytime, narrow your targeting, or reduce application volume. We also provide interview scheduling tools to help manage multiple opportunities efficiently.",
+    question: "What happens when I get an interview request?",
+    answer: "You receive an instant notification via email and in-app alert when any recruiter responds. We provide a summary of the role, company, and your submitted application for quick context. Our Pro and Enterprise plans include an AI interview prep assistant that helps you prepare with company-specific research, likely questions, and practice sessions.",
+  },
+  {
+    question: "How do you find hiring manager email addresses?",
+    answer: "Our system uses multiple data sources including LinkedIn, company websites, professional directories, and public databases to identify and verify hiring manager contacts. We use advanced verification to ensure email addresses are valid before sending outreach. This direct approach bypasses ATS filters entirely and puts your resume directly in decision-makers' inboxes.",
+  },
+  {
+    question: "Is my data secure? Who sees my information?",
+    answer: "We take security seriously. All data is encrypted with AES-256 both in transit and at rest. We're SOC 2 Type II compliant and conduct regular security audits. Your information is never sold to third parties. Only you and the companies you apply to see your application materials. You can export or delete all your data at any time.",
+  },
+  {
+    question: "Can I cancel or pause my campaign anytime?",
+    answer: "Yes, you have complete control. You can pause applications with a single click—useful when you have enough interviews or need a break. You can also adjust the pace (more aggressive or slower), change target criteria, or cancel entirely. There are no long-term contracts, and you can cancel your subscription anytime with no penalty.",
   },
 ]
 
@@ -57,10 +59,10 @@ export function FAQ() {
           className="text-center mb-16"
         >
           <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#00F0FF] mb-4 block">
-            FAQ
+            QUESTIONS
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#F9FAFB] mb-4">
-            Common Questions
+            Everything You Need to Know
           </h2>
         </motion.div>
 
@@ -72,29 +74,34 @@ export function FAQ() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="mb-4"
+              transition={{ duration: 0.4, delay: index * 0.08 }}
+              className={`border-b border-[var(--border-subtle)] ${
+                openIndex === index ? 'bg-[rgba(0,240,255,0.02)]' : ''
+              }`}
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className={`w-full bg-[#111118] border rounded-xl p-5 text-left flex items-center justify-between transition-all duration-300 ${
-                  openIndex === index 
-                    ? "border-[rgba(0,240,255,0.3)]" 
-                    : "border-[var(--border-subtle)] hover:border-[rgba(0,240,255,0.2)]"
-                }`}
+                className="w-full py-6 text-left flex items-center justify-between gap-4 group"
               >
-                <span className="font-medium text-[#F9FAFB] pr-4">{faq.question}</span>
+                <span className={`text-lg font-semibold transition-all duration-300 ${
+                  openIndex === index 
+                    ? 'text-[#F9FAFB]' 
+                    : 'text-[#F9FAFB] group-hover:text-[#00F0FF] group-hover:translate-x-2'
+                }`}>
+                  {faq.question}
+                </span>
                 <motion.div
                   animate={{ rotate: openIndex === index ? 45 : 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: openIndex === index ? "rgba(0,240,255,0.1)" : "transparent" }}
+                  transition={{ duration: 0.2, type: "spring", stiffness: 300 }}
+                  className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
+                    openIndex === index 
+                      ? 'bg-[rgba(0,240,255,0.1)]' 
+                      : 'bg-transparent group-hover:bg-[rgba(0,240,255,0.05)]'
+                  }`}
                 >
-                  {openIndex === index ? (
-                    <Minus className="w-4 h-4 text-[#00F0FF]" />
-                  ) : (
-                    <Plus className="w-4 h-4 text-[#9CA3AF]" />
-                  )}
+                  <Plus className={`w-5 h-5 transition-colors ${
+                    openIndex === index ? 'text-[#00F0FF]' : 'text-[#00F0FF]'
+                  }`} />
                 </motion.div>
               </button>
               <AnimatePresence>
@@ -103,12 +110,15 @@ export function FAQ() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ 
+                      height: { duration: 0.3, ease: [0.34, 1.56, 0.64, 1] },
+                      opacity: { duration: 0.2, delay: 0.1 }
+                    }}
                     className="overflow-hidden"
                   >
-                    <div className="px-5 py-4 text-[#9CA3AF] leading-relaxed">
+                    <p className="pb-6 pr-12 text-[#9CA3AF] leading-relaxed max-w-[90%]">
                       {faq.answer}
-                    </div>
+                    </p>
                   </motion.div>
                 )}
               </AnimatePresence>

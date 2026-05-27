@@ -1,154 +1,133 @@
 "use client"
 
+import { motion } from "framer-motion"
 import Link from "next/link"
-import { Sparkles, Github, Twitter, Linkedin } from "lucide-react"
+import { Rocket, Github, Twitter, Linkedin, MessageSquare } from "lucide-react"
 
 const footerLinks = {
   product: [
     { name: "Features", href: "#features" },
     { name: "Pricing", href: "#pricing" },
-    { name: "How It Works", href: "#how-it-works" },
-    { name: "FAQ", href: "#faq" },
+    { name: "API", href: "#" },
+    { name: "Changelog", href: "#" },
+    { name: "Roadmap", href: "#" },
   ],
   company: [
     { name: "About", href: "#" },
     { name: "Blog", href: "#" },
     { name: "Careers", href: "#" },
-    { name: "Press", href: "#" },
+    { name: "Contact", href: "#" },
+    { name: "Press Kit", href: "#" },
   ],
   resources: [
-    { name: "Documentation", href: "#" },
     { name: "Help Center", href: "#" },
     { name: "Community", href: "#" },
-    { name: "API Reference", href: "#" },
+    { name: "Templates", href: "#" },
+    { name: "Webinars", href: "#" },
+    { name: "Status", href: "#" },
   ],
   legal: [
     { name: "Privacy Policy", href: "#" },
     { name: "Terms of Service", href: "#" },
-    { name: "Cookie Policy", href: "#" },
     { name: "GDPR", href: "#" },
+    { name: "Security", href: "#" },
+    { name: "Cookies", href: "#" },
   ],
 }
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-card/50">
-      <div className="container mx-auto px-4 md:px-6 py-12 md:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
-          {/* Brand column */}
-          <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl gradient-ocean-violet flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-white" />
+    <footer className="bg-[#050505] border-t border-[var(--border-subtle)]">
+      <div className="container mx-auto px-6 lg:px-8 py-16 md:py-20">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-12">
+          {/* Brand column - spans 2 on mobile, 2 on desktop */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="col-span-2"
+          >
+            <Link href="/" className="flex items-center gap-2.5 mb-4 group">
+              <div className="w-9 h-9 rounded-lg bg-[#00F0FF] flex items-center justify-center">
+                <Rocket className="w-4.5 h-4.5 text-[#050505] rotate-45" />
               </div>
-              <span className="text-xl font-bold text-foreground">
-                Career<span className="gradient-text">Flow</span>
+              <span className="text-lg font-bold tracking-[-0.02em] text-[#F9FAFB]">
+                CareerFlow
               </span>
             </Link>
-            <p className="text-sm text-muted-foreground mb-4">
-              AI-powered job applications that land you interviews while you sleep.
+            <p className="text-sm text-[#9CA3AF] mb-6 max-w-xs leading-relaxed">
+              Autonomous career growth for modern professionals. Let AI handle the applications while you focus on what matters.
             </p>
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-teal animate-pulse" />
-              <span className="text-xs text-muted-foreground">All systems operational</span>
+            
+            {/* Social icons */}
+            <div className="flex items-center gap-3">
+              {[
+                { icon: Twitter, label: "Twitter" },
+                { icon: Linkedin, label: "LinkedIn" },
+                { icon: Github, label: "GitHub" },
+                { icon: MessageSquare, label: "Discord" },
+              ].map(({ icon: Icon, label }) => (
+                <Link
+                  key={label}
+                  href="#"
+                  aria-label={label}
+                  className="w-9 h-9 rounded-full bg-[#111118] border border-[var(--border-subtle)] flex items-center justify-center text-[#6B7280] hover:text-white hover:border-[rgba(0,240,255,0.3)] hover:scale-110 transition-all"
+                >
+                  <Icon className="w-4 h-4" />
+                </Link>
+              ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Links columns */}
-          <div>
-            <h4 className="font-semibold text-foreground mb-4">Product</h4>
-            <ul className="space-y-3">
-              {footerLinks.product.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold text-foreground mb-4">Company</h4>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold text-foreground mb-4">Resources</h4>
-            <ul className="space-y-3">
-              {footerLinks.resources.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold text-foreground mb-4">Legal</h4>
-            <ul className="space-y-3">
-              {footerLinks.legal.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {[
+            { title: "Product", links: footerLinks.product },
+            { title: "Company", links: footerLinks.company },
+            { title: "Resources", links: footerLinks.resources },
+            { title: "Legal", links: footerLinks.legal },
+          ].map((column, i) => (
+            <motion.div
+              key={column.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+            >
+              <h4 className="text-xs font-semibold text-[#F9FAFB] uppercase tracking-wider mb-4">
+                {column.title}
+              </h4>
+              <ul className="space-y-3">
+                {column.links.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-[#6B7280] hover:text-white transition-colors relative group"
+                    >
+                      {link.name}
+                      <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-[#00F0FF] group-hover:w-full transition-all duration-300" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} CareerFlow AI. All rights reserved.
+        <div className="pt-8 border-t border-[var(--border-subtle)] flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-[#6B7280]">
+            © 2026 CareerFlow AI. All rights reserved.
           </p>
 
-          <div className="flex items-center gap-4">
-            <Link
-              href="#"
-              className="w-10 h-10 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="Twitter"
-            >
-              <Twitter className="w-5 h-5" />
-            </Link>
-            <Link
-              href="#"
-              className="w-10 h-10 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="GitHub"
-            >
-              <Github className="w-5 h-5" />
-            </Link>
-            <Link
-              href="#"
-              className="w-10 h-10 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="w-5 h-5" />
-            </Link>
+          {/* Status indicator */}
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#10B981] pulse-dot" />
+            <span className="text-xs font-mono text-[#6B7280]">All Systems Operational</span>
           </div>
+
+          <p className="text-sm text-[#6B7280]">
+            Made with <span className="text-[#F43F5E]">♥</span> by AI, for humans
+          </p>
         </div>
       </div>
     </footer>
