@@ -187,7 +187,7 @@ export function Hero() {
         </div>
 
         {/* Live Notifications */}
-        <div className="absolute bottom-24 left-6 lg:left-8 hidden md:block">
+        <div className="absolute bottom-24 right-6 lg:bottom-28 lg:right-8 hidden md:block z-20">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentNotification}
