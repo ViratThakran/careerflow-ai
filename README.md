@@ -4,6 +4,34 @@ ApplyPilot AI is an autonomous job application assistant that completely automat
 
 ---
 
+## Project Layout
+
+```
+ApplyPilot-ai/
+├── frontend/     — Next.js app (pages, components, API routes)
+├── backend/      — Database migrations + environment config
+└── docs/         — Screenshots, remaining tasks PDF
+```
+
+| Folder | README | Purpose |
+|--------|--------|---------|
+| **frontend/** | [frontend/README.md](frontend/README.md) | UI + API routes — run `npm run dev` inside |
+| **backend/** | [backend/README.md](backend/README.md) | Supabase migrations + env var guide |
+| **docs/** | — | Screenshots + [Remaining Tasks PDF](docs/Remaining_Tasks.pdf) |
+
+---
+
+## Quick Start
+
+```bash
+cd frontend
+npm install
+cp ../backend/.env.example .env.local   # fill in your keys
+npm run dev
+```
+
+---
+
 ## Website Preview
 
 <img width="1917" height="1040" alt="ApplyPilot AI landing page" src="https://github.com/user-attachments/assets/c7ed4cb5-b549-4176-a4e2-133e8b312381" />

@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ApplyPilot AI (Next.js dev server)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "C:\\Users\\virat\\careerflow-ai"],
+      "port": 3000
+    }
+  ]
+}
